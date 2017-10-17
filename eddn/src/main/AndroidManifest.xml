@@ -1,0 +1,9 @@
+<manifest package="com.phapps.elitedangerous.eddn"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <service android:name=".EdDnZmqService"
+            android:exported="false" />
+    </application>
+</manifest>
