@@ -1,0 +1,70 @@
+/**
+ * Contains tasks used to generate and upload the Bintray maven package.
+ */
+apply plugin: 'com.jfrog.bintray'
+
+version = libraryVersion
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompile.classpath.files
+    })
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+// Bintray
+String bintrayUser = System.getenv('BINTRAY_USER')
+String bintrayKey = System.getenv('BINTRAY_KEY')
+String bintrayGpgPassword = System.getenv('BINTRAY_GPG_PASSWORD')
+File localPropertiesFile = project.rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    Properties properties = new Properties()
+    properties.load(localPropertiesFile.newDataInputStream())
+    bintrayUser = properties.getProperty("bintray.user", bintrayUser)
+    bintrayKey = properties.getProperty("bintray.key", bintrayKey)
+    bintrayGpgPassword = properties.getProperty("bintray.gpg.password", bintrayGpgPassword)
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayKey
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = bintrayGpgPassword
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}
