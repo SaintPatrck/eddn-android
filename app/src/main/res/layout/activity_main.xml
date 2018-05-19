@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.phapps.elitedangerous.eddn.MainActivity">
+    tools:context="com.phapps.elitedangerous.eddn.sample.MainActivity">
 
     <EditText
         android:id="@+id/console"
@@ -13,6 +13,7 @@
         android:background="@android:color/black"
         android:inputType="none"
         android:textColor="@android:color/holo_green_light"
-        tools:text="test message" />
+        tools:text="test message"
+        tools:ignore="Autofill,LabelFor" />
 
 </android.support.constraint.ConstraintLayout>

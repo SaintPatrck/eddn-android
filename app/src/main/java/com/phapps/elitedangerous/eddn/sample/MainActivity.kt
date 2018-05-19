@@ -1,4 +1,4 @@
-package com.phapps.elitedangerous.eddn
+package com.phapps.elitedangerous.eddn.sample
 
 import android.content.ComponentName
 import android.content.Context
@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
+import com.phapps.elitedangerous.eddn.EdDnStreamListener
+import com.phapps.elitedangerous.eddn.EdDnZmqService
 
 class MainActivity : AppCompatActivity() {
 

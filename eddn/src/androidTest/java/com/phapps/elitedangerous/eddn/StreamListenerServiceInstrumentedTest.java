@@ -30,6 +30,7 @@ public class StreamListenerServiceInstrumentedTest {
         EdDnZmqService.EdDnStreamBinder binder =
                 (EdDnZmqService.EdDnStreamBinder)mServiceRule.bindService(serviceIntent);
 
+        binder.connect();
         binder.subscribe(new EdDnStreamListener() {
             @Override
             public void onMessageReceived(String message) {
@@ -41,7 +42,6 @@ public class StreamListenerServiceInstrumentedTest {
                 Log.e(TAG, "Stream error: " + message);
             }
         });
-        binder.connect();
 
         // Stream for 10 seconds
         signal.await(10, TimeUnit.SECONDS);
