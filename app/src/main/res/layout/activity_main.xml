@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,10 @@
         android:background="@android:color/black"
         android:inputType="none"
         android:textColor="@android:color/holo_green_light"
-        tools:text="test message"
-        tools:ignore="Autofill,LabelFor" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,LabelFor"
+        tools:text="test message" />
 
 </android.support.constraint.ConstraintLayout>
