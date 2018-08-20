@@ -13,7 +13,7 @@ ext {
 
     libraryName = 'EDDN-Android'
     libraryDescription = 'An Elite: Dangerous EDDN client for Android.'
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     developerId = 'stpatrck'
     developerName = 'Patrick Honkonen'

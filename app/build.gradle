@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.phapps.elitedangerous.eddn.sample"
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,14 +20,14 @@ android {
 
 dependencies {
     /* Android Support Libs */
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     /* Kotlin Language Support */
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     /* Elite: Dangerous EDDN Android Client */
-    implementation 'com.github.stpatrck:eddn:1.0.1'
+    implementation 'com.github.stpatrck:eddn:1.0.2'
 
     /* Testing */
     testImplementation 'junit:junit:4.12'
