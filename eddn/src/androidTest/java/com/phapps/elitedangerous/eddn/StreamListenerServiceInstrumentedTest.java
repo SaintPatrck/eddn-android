@@ -19,6 +19,7 @@ public class StreamListenerServiceInstrumentedTest {
 
     @Rule
     public final ServiceTestRule mServiceRule = new ServiceTestRule();
+    private EdDnStreamListener mListener;
 
     @Test
     public void testStream() throws Exception {
@@ -31,7 +32,7 @@ public class StreamListenerServiceInstrumentedTest {
                 (EdDnZmqService.EdDnStreamBinder)mServiceRule.bindService(serviceIntent);
 
         binder.connect();
-        binder.subscribe(new EdDnStreamListener() {
+        mListener = new EdDnStreamListener() {
             @Override
             public void onMessageReceived(String message) {
                 Log.d(TAG, "Stream message: " + message);
@@ -41,9 +42,13 @@ public class StreamListenerServiceInstrumentedTest {
             public void onError(String message) {
                 Log.e(TAG, "Stream error: " + message);
             }
-        });
+        };
+        binder.subscribe(mListener);
 
         // Stream for 10 seconds
         signal.await(10, TimeUnit.SECONDS);
+
+        binder.unsubscribe(mListener);
+        binder.disconnect();
     }
 }
